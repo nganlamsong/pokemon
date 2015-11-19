@@ -124,7 +124,6 @@ aside > .inner:nth-child(2) {
 }
 
 .list .list-item-wrapper:hover {
-    height: 40px;
     background-color: rgba(255,255,255,.55);
     transition: all .2s linear;
 }
@@ -195,7 +194,7 @@ article.main-info {
 }
 
 .info-content > .inner {
-    background-color: rgba(0,0,0,.9);
+    background-color: rgba(0,0,0,.7);
     height: 100%;
     padding: 20px;
     position: relative;
@@ -234,7 +233,7 @@ article.main-info {
     width: calc(20% - 12px);
     margin-bottom: 10px;
     transition: all .2s linear;
-    background-color: rgba(255,255,255,.1);
+    background-color: rgba(255,255,255,.05);
 }
 
 .grid-item:hover {
@@ -243,4 +242,11 @@ article.main-info {
 
 .grid-item > img {
     max-width: 100%;
+}
+
+@media (min-width: 1200px) {
+	.list .list-item-wrapper {
+		height: 50%;
+	}
+}
 }
