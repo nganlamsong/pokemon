@@ -360,6 +360,15 @@
                             <div class="grid-item">
                                 <img src="http://img07.deviantart.net/777c/i/2014/082/6/8/pokemon___megalucario_by_sa_dui-d6h8tdh.jpg">
                             </div>
+							<div class="grid-item">
+                                <img src="http://img06.deviantart.net/2ade/i/2015/011/2/4/pokemon___megalucario_vs_weavile_by_sa_dui-d8dj0pw.jpg">
+                            </div>
+							<div class="grid-item">
+                                <img src="http://img03.deviantart.net/cc67/i/2013/223/7/4/megalucario_by_nganlamsong-d6hn4b9.png">
+                            </div>
+							<div class="grid-item">
+                                <img src="http://img06.deviantart.net/a23b/i/2014/048/5/4/tag_team_battle___by_rikuaoshi-d76ut6n.jpg">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -381,6 +390,16 @@
                     gutter: 0
                 });
                 
+				var $grid = $('.grid').imagesLoaded( function() {
+					  // init Masonry after all images have loaded
+					  $grid.masonry({
+						itemSelector: '.grid-item',
+						columnWidth: '.grid-item',
+						percentPosition: true,
+						gutter: 10
+					  });
+				});
+				
                 // layout Masonry after each image loads
                 $grid.imagesLoaded().progress( function() {
                     $grid.masonry('layout');
