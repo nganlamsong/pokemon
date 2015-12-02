@@ -56,4 +56,29 @@ class Admin extends CI_Controller {
         $this->load->model('pimage');
         echo $this->pimage->delete_image($id);
     }
+
+    public function start_progress() {
+        $id = $_REQUEST['id'];
+        $inprogress = $this->pokemon->get_progress_pkm();
+        $data=array();
+        if ($inprogress) {
+            $data["is_started"] = "1";
+            $data["refOject"] = $inprogress;
+        } else {
+            //start progress the pokemon
+            $data["is_started"] = "0";
+            $data["refOject"] = $inprogress;
+            $data["start_result"] = $this->pokemon->start_progress($id);
+        }
+        echo json_encode($data);
+    }
+
+    public function force_start_progress() {
+        $id = $_REQUEST['id'];
+
+        //start progress the pokemon
+        $data["start_result"] = $this->pokemon->start_progress($id);
+
+        echo json_encode($data);
+    }
 }

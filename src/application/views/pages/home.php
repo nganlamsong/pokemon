@@ -2,11 +2,23 @@
     <nav>
         <ul class="list-unstyled">
             <li>
-                <a id="popover">
+                <a href="#">
                     <img src="<?php echo base_url();?>resource/img/Mega_Kangaskhan.png" class="inprogress">
                     <div id="countup">
                     </div>
                 </a>
+                <div class="sidebar-popout">
+                    Another pokemon for my Mega evolution collection.
+                    I am doing so much hard work and don't even have a tablet for my self.
+                    Saving money to buy one. If you love my works and you are generous, you can encourage me by donation. :)
+                    <div class="clearfix m-b-20"></div>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="5QKXA84YYMFSE">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                </div>
             </li>
             <li class="selected">
                 <a href="#">

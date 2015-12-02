@@ -101,12 +101,25 @@ class Pokemon extends CI_Model {
             }
         } else {
             $pList['status'] = 0;
-            $pList['query'] = $query;
         }
         return json_encode($pList);
     }
         
     public function delete($id) {
         return json_encode($this->db->delete('pokemon', array('id' => $id)));
+    }
+
+    public function get_progress_pkm() {
+        $result = $this->db->get_where('pokemon', array('INPROGRESS' => '1'));
+        return $result->result_array();
+    }
+
+    public function start_progress($id) {
+
+        $this->db->where('inprogress', '1');
+        $this->db->update('pokemon', array('INPROGRESS' => '0'));
+
+        $this->db->where('id', $id);
+        return $this->db->update('pokemon',  array('INPROGRESS' => '1'));
     }
 }

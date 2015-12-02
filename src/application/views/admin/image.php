@@ -1,5 +1,5 @@
 <form id="form-img">
-    <input type="hidden" name="pokemon-id" value="<?php echo $pokemon_id; ?>">
+    <input type="hidden" class="pokemon-id" name="pokemon-id" value="<?php echo $pokemon_id; ?>">
     <table class="table">
         <tbody>
             <?php if ($images) {?>
@@ -40,4 +40,5 @@
             </tr>
         </tfoot>
     </table>
+    <button class="btn btn-success btn-start"><i class="fa fa-play"></i> Start to draw this pokemon</button>
 </form>

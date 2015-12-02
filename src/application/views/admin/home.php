@@ -399,5 +399,50 @@
                 }
             });
         });
+
+        $(document).on("click", ".btn-start", function(e){
+            e.preventDefault();
+            var that = $(this);
+            that.button("loading");
+            var id = $("#form-img").children(".pokemon-id").val();
+            console.log("id", id);
+            $.ajax({
+                url: '<?php echo base_url(); ?>index.php/admin/start_progress',
+                type: 'POST',
+                data: "id=" + id,
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data.is_started == "0" && data.start_result) {
+                        alert("start ok!");
+                    } else if (data.is_started == "1"){
+                        var confirmMsg = confirm(data.refOject[0].NAME + ' is inprogress, would you like to stop it and execute this pokemon? ');
+                        if (confirmMsg) {
+                            $.ajax({
+                                url: '<?php echo base_url(); ?>index.php/admin/force_start_progress',
+                                type: 'POST',
+                                data: "id=" + id,
+                                dataType: 'json',
+                                success: function(data) {
+                                    console.log(data);
+                                    if (data.start_result) {
+                                        alert("OK");
+                                    }
+                                },
+                                error: function(a, b, c) {
+                                    console.log("fail cmnr", a, b, c);
+                                    that.button("reset");
+                                }
+                            });
+                        }
+                    }
+                    that.button("reset");
+                },
+                error: function(a, b, c) {
+                    console.log("fail cmnr", a, b, c);
+                    that.button("reset");
+                }
+            });
+        });
     });
 </script>
