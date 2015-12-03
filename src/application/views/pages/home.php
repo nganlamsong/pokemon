@@ -3,7 +3,13 @@
         <ul class="list-unstyled">
             <li>
                 <a href="#">
-                    <img src="<?php echo base_url();?>resource/img/Mega_Kangaskhan.png" class="inprogress">
+                    <?php if (isset($in_progress[0]['AVARTAR']) && $in_progress[0]['AVARTAR'] != "") { ?>
+                        <div class="image">
+                            <img src="<?php echo $in_progress[0]['avartar']; ?>" alt="">
+                        </div>
+                    <?php } else { ?>
+                        <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png" class="inprogress">
+                    <?php }?>
                     <div id="countup">
                     </div>
                 </a>
@@ -62,9 +68,18 @@
         </div>
     </article>
 </main>
+<?php
+$in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
+?>
 <script type="text/javascript">
     $(document).ready(function(e) {
-        $('#countup').countup();
+
+        var date = new Date(<?php echo $in_progress_pkm->year; ?>, <?php echo $in_progress_pkm->mon - 1; ?>, <?php echo $in_progress_pkm->mday; ?>, <?php echo $in_progress_pkm->hours; ?>, <?php echo $in_progress_pkm->minutes; ?>, <?php echo $in_progress_pkm->seconds; ?>);
+        console.log(date);
+        $('#countup').countup({
+            start: date
+        });
+
         var $grid = $('#grid').imagesLoaded( function() {
             // init Masonry after all images have loaded
             $grid.masonry({

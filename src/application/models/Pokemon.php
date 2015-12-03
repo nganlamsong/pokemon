@@ -119,7 +119,10 @@ class Pokemon extends CI_Model {
         $this->db->where('inprogress', '1');
         $this->db->update('pokemon', array('INPROGRESS' => '0'));
 
+        date_default_timezone_set('Asia/Saigon');
+        $date_array = getdate();
+
         $this->db->where('id', $id);
-        return $this->db->update('pokemon',  array('INPROGRESS' => '1'));
+        return $this->db->update('pokemon',  array('INPROGRESS' => '1', 'DATE_START' => json_encode($date_array)));
     }
 }

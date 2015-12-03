@@ -47,6 +47,7 @@ class Home extends CI_Controller {
         $data["images"] = $this->mpagination->fetch_images ($config["per_page"], $page);
         $data["links"] = $this->pagination->create_links();
         $data['title'] = 'title';
+        $data['in_progress'] = $this->pokemon->get_progress_pkm();
         $this->load->view('common/header');
         $this->load->view('pages/home', $data);
         $this->load->view('common/footer');

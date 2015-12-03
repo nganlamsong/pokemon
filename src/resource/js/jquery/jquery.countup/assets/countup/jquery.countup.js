@@ -4,132 +4,130 @@
  * @version 	1.0
  * @url			http://tutorialzine.com/2012/09/count-up-jquery/
  * @license		MIT License
- * start: new Date(2012, 10, 27, 15, 58, 21) //year, month, day, hour, min, sec
  */
 
 (function($){
-	
-	// Number of seconds in every time division
-	var days	= 24*60*60,
-		hours	= 60*60,
-		minutes	= 60;
-	
-	// Creating the plugin
-	$.fn.countup = function(prop){
-		
-            var options = $.extend({
-                callback	: function(){},
-                start		: new Date(),
-                step: 1
-            },prop);
 
-            var passed = 0, d, h, m, s, positions;
+    // Number of seconds in every time division
+    var days	= 24*60*60,
+        hours	= 60*60,
+        minutes	= 60;
 
-            // Initialize the plugin
-            init(this, options);
+    // Creating the plugin
+    $.fn.countup = function(prop){
 
-            positions = this.find('.position');
+        var options = $.extend({
+            callback	: function(){},
+            start		: new Date(),
+            step: 1
+        },prop);
 
-            (function tick(){
+        var passed = 0, d, h, m, s, positions;
 
-                passed = Math.floor((new Date() - options.start) / 1000);
+        // Initialize the plugin
+        init(this, options);
 
-                // Number of days passed
-                d = Math.floor(passed / days);
-                updateDuo(0, 1, d);
-                passed -= d*days;
+        positions = this.find('.position');
 
-                // Number of hours left
-                h = Math.floor(passed / hours);
-                updateDuo(2, 3, h);
-                passed -= h*hours;
+        (function tick(){
 
-                // Number of minutes left
-                m = Math.floor(passed / minutes);
-                updateDuo(4, 5, m);
-                passed -= m*minutes;
+            passed = Math.floor((new Date() - options.start) / 1000);
+            // Number of days passed
+            d = Math.floor(passed / days);
+            updateDuo(0, 1, d);
+            passed -= d*days;
 
-                // Number of seconds left
-                s = passed;
-                updateDuo(6, 7, s);
+            // Number of hours left
+            h = Math.floor(passed / hours);
+            updateDuo(2, 3, h);
+            passed -= h*hours;
 
-                // Calling an optional user supplied callback
-                options.callback(d, h, m, s);
+            // Number of minutes left
+            m = Math.floor(passed / minutes);
+            updateDuo(4, 5, m);
+            passed -= m*minutes;
 
-                // Scheduling another call of this function in 1s
-                setTimeout(tick, options.step * 1000);
-            })();
-		
-            // This function updates two digit positions at once
-            function updateDuo(minor,major,value){
-                switchDigit(positions.eq(minor),Math.floor(value/10)%10);
-                switchDigit(positions.eq(major),value%10);
+            // Number of seconds left
+            s = passed;
+            updateDuo(6, 7, s);
+
+            // Calling an optional user supplied callback
+            options.callback(d, h, m, s);
+
+            // Scheduling another call of this function in 1s
+            setTimeout(tick, options.step * 1000);
+        })();
+
+        // This function updates two digit positions at once
+        function updateDuo(minor,major,value){
+            switchDigit(positions.eq(minor),Math.floor(value/10)%10);
+            switchDigit(positions.eq(major),value%10);
+        }
+
+        return this;
+    };
+
+
+    function init(elem, options){
+        elem.addClass('countdownHolder');
+
+        // Creating the markup inside the container
+        $.each(['Days','Hours','Minutes','Seconds'],function(i){
+            $('<span class="count'+this+'">').html(
+                '<span class="position">\
+                        <span class="digit static">0</span>\
+                </span>\
+                <span class="position">\
+                        <span class="digit static">0</span>\
+                </span>'
+            ).appendTo(elem);
+
+            if(this!="Seconds"){
+                elem.append('<span class="countDiv countDiv'+i+'"></span>');
             }
+        });
 
-            return this;
-	};
+    }
 
+    // Creates an animated transition between the two numbers
+    function switchDigit(position,number){
 
-	function init(elem, options){
-            elem.addClass('countdownHolder');
+        var digit = position.find('.digit')
 
-            // Creating the markup inside the container
-            $.each(['Days','Hours','Minutes','Seconds'],function(i){
-                $('<span class="count'+this+'">').html(
-                        '<span class="position">\
-                                <span class="digit static">0</span>\
-                        </span>\
-                        <span class="position">\
-                                <span class="digit static">0</span>\
-                        </span>'
-                ).appendTo(elem);
+        if(digit.is(':animated')){
+            return false;
+        }
 
-                if(this!="Seconds"){
-                    elem.append('<span class="countDiv countDiv'+i+'"></span>');
-                }
+        if(position.data('digit') == number){
+            // We are already showing this number
+            return false;
+        }
+
+        position.data('digit', number);
+
+        var replacement = $('<span>',{
+            'class':'digit',
+            css:{
+                top:'-2.1em',
+                opacity:0
+            },
+            html:number
+        });
+
+        // The .static class is added when the animation
+        // completes. This makes it run smoother.
+
+        digit
+            .before(replacement)
+            .removeClass('static')
+            .animate({top:'2.5em',opacity:0},'fast',function(){
+                digit.remove();
             });
 
-	}
-
-	// Creates an animated transition between the two numbers
-	function switchDigit(position,number){
-		
-		var digit = position.find('.digit')
-		
-		if(digit.is(':animated')){
-                    return false;
-		}
-		
-		if(position.data('digit') == number){
-                    // We are already showing this number
-                    return false;
-		}
-		
-		position.data('digit', number);
-		
-		var replacement = $('<span>',{
-                    'class':'digit',
-                    css:{
-                            top:'-2.1em',
-                            opacity:0
-                    },
-                    html:number
-		});
-		
-		// The .static class is added when the animation
-		// completes. This makes it run smoother.
-		
-		digit
-                    .before(replacement)
-                    .removeClass('static')
-                    .animate({top:'2.5em',opacity:0},'fast',function(){
-                            digit.remove();
-                    });
-
-		replacement
-                    .delay(100)
-                    .animate({top:0,opacity:1},'fast',function(){
-                            replacement.addClass('static');
-                    });
-	}
+        replacement
+            .delay(100)
+            .animate({top:0,opacity:1},'fast',function(){
+                replacement.addClass('static');
+            });
+    }
 })(jQuery);
