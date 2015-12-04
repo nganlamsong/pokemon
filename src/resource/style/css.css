@@ -38,6 +38,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
 }
 
 aside {
@@ -46,13 +47,14 @@ aside {
     -ms-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
-    float: right;
-    width: 100px;
+    /* float: right; */
+    /* width: 100px; */
     text-align: center;
-    height: 100%;
+    /* height: 100%; */
     background-color: rgba(0,0,0,0);
     position: relative;
     z-index: 2;
+    font-size: 0px;
 }
 
 aside:hover {
@@ -110,10 +112,11 @@ aside a:hover {
 
 aside li {
     perspective: 1000px;
-
     perspective-origin: 0% 0%;
-
     position: relative;
+    display: inline-block;
+    width: 100px;
+    vertical-align: bottom;
     -webkit-transition: all .7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -moz-transition: all .7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -ms-transition: all .7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -175,8 +178,14 @@ aside:hover li {
     transform: translateX(0);
 }
 
+.blur {
+    -webkit-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
 main {
-    width: calc(100% - 100px);
+    width: 100%;
     float: left;
     height: 100%;
     background-color: transparent;

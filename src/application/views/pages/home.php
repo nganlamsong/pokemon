@@ -1,3 +1,34 @@
+
+<div class="modal fade" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">About</h4>
+            </div>
+            <div class="modal-body">
+                <h2>About me</h2>
+                <p>
+                    I am an artist who love to draw pokemon, and also I am a web developer. I made a little web page to collect my arts on
+                    <a href="http://nganlamsong.deviantart.com">Deviant</a> to do the tracking for my progress and make a gallery in my favorite styles.
+                </p>
+                <p>
+                    Pokemon is hereby copyrighted by <strong>@GameFreak - The Pokemon Company</strong>, and all the arts on this website is created by me as fan art.
+                    I am not own Pokemon.
+                </p>
+                <h2>Planning</h2>
+                <p>
+                    I love Mega Evolution, although I dislike some of them, I always wish to draw all mega pokemon.
+                </p>
+                <p>
+                    More desire, I would like to draw the full list of Pokemon. :v
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <aside>
     <nav>
         <ul class="list-unstyled">
@@ -40,7 +71,7 @@
             </li>
             <li><a href="#">Contribute</a></li>
             <li><a href="#">Donate</a></li>
-            <li><a href="#">About me</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#about-modal" >About</a></li>
         </ul>
     </nav>
 </aside>
@@ -73,6 +104,14 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
 ?>
 <script type="text/javascript">
     $(document).ready(function(e) {
+
+        $('#about-modal').on('show.bs.modal', function (event) {
+            $("main").addClass("blur");
+        });
+
+        $('#about-modal').on('hide.bs.modal', function (event) {
+            $("main").removeClass("blur");
+        });
 
         var date = new Date(<?php echo $in_progress_pkm->year; ?>, <?php echo $in_progress_pkm->mon - 1; ?>, <?php echo $in_progress_pkm->mday; ?>, <?php echo $in_progress_pkm->hours; ?>, <?php echo $in_progress_pkm->minutes; ?>, <?php echo $in_progress_pkm->seconds; ?>);
         console.log(date);
