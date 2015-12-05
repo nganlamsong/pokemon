@@ -22,7 +22,10 @@ html, body {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    text-align: center;
+    text-align: right;
+    padding-right: 40px;
+    background-color: rgba(0, 0, 0, 0.24);
+    margin-bottom: 0px;
 }
 
 .m-b-20 {
@@ -41,24 +44,27 @@ body {
     overflow: hidden;
 }
 
-aside {
+#menu {
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     -ms-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
-    /* float: right; */
-    /* width: 100px; */
     text-align: center;
-    /* height: 100%; */
+    height: 100px;
     background-color: rgba(0,0,0,0);
     position: relative;
     z-index: 2;
     font-size: 0px;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    z-index: 2000;
+    background-color: rgba(255,255,255,.05);
 }
 
-aside:hover {
-    background-color: rgba(255,255,255,.05);
+#menu:hover {
+    background-color: rgba(255,255,255,.2);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .3);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .3);
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .3);
@@ -72,7 +78,7 @@ img.img-icon {
     right: -10px;
 }
 
-aside a {
+#menu a {
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     -ms-transition: all .2s ease-in-out;
@@ -100,19 +106,18 @@ img.inprogress {
     height: 50px;
 }
 
-aside a:focus, aside a:hover {
+#menu a:focus, #menu a:hover {
     text-decoration: none;
     color: white;
     letter-spacing: 2px;
 }
 
-aside a:hover {
+#menu a:hover {
     background-color: rgba(255,255,255,.2);
 }
 
-aside li {
+#menu li {
     perspective: 1000px;
-    perspective-origin: 0% 0%;
     position: relative;
     display: inline-block;
     width: 100px;
@@ -124,11 +129,11 @@ aside li {
     transition: all .7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-aside li.selected > a {
+#menu li.selected > a {
     background-color: rgba(255,255,255,.1);
 }
 
-aside li:nth-child(n + 2) {
+/*#menu li:nth-child(n + 2) {
     opacity: 0;
     -webkit-transform: translateX(100%);
     -moz-transform: translateX(100%);
@@ -137,7 +142,7 @@ aside li:nth-child(n + 2) {
     transform: translateX(100%);
 }
 
-aside li:nth-child(3) {
+#menu li:nth-child(3) {
     -webkit-transition-delay: .1s;
     -moz-transition-delay: .1s;
     -ms-transition-delay: .1s;
@@ -145,7 +150,7 @@ aside li:nth-child(3) {
     transition-delay: .1s;
 }
 
-aside li:nth-child(4) {
+#menu li:nth-child(4) {
     -webkit-transition-delay: .15s;
     -moz-transition-delay: .15s;
     -ms-transition-delay: .15s;
@@ -153,7 +158,7 @@ aside li:nth-child(4) {
     transition-delay: .15s;
 }
 
-aside li:nth-child(5) {
+#menu li:nth-child(5) {
     -webkit-transition-delay: .2s;
     -moz-transition-delay: .2s;
     -ms-transition-delay: .2s;
@@ -161,22 +166,22 @@ aside li:nth-child(5) {
     transition-delay: .2s;
 }
 
-aside li:nth-child(6) {
+#menu li:nth-child(6) {
     -webkit-transition-delay: .25s;
     -moz-transition-delay: .25s;
     -ms-transition-delay: .25s;
     -o-transition-delay: .25s;
     transition-delay: .25s;
-}
+}*/
 
-aside:hover li {
+/*#menu:hover li {
     opacity: 1;
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
     transform: translateX(0);
-}
+}*/
 
 .blur {
     -webkit-filter: blur(5px);
@@ -184,11 +189,13 @@ aside:hover li {
     filter: blur(5px);
 }
 
-main {
+#content {
     width: 100%;
     float: left;
     height: 100%;
     background-color: transparent;
+    padding-top: 100px;
+    overflow: auto;
 }
 
 .menu-icon {
@@ -228,7 +235,6 @@ main {
 .grid-item > figure {
     transition: all .2s linear;
     background-color: rgba(255,255,255,.1);
-    /* border-radius: 4px; */
     overflow: hidden;
     box-shadow: 0px 0px 6px rgba(0,0,0,.2);
 }
@@ -255,40 +261,75 @@ main {
     min-height: 100px;
     background-color: white;
     position: absolute;
-    top: 0px;
-    right: 100%;
+    top: 100%;
+    left: 0px;
     z-index: 1000;
-
     padding: 40px;
-
+    visibility: hidden;
+    opacity: 0;
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     -ms-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
-
-    -webkit-transform-origin:100% 50%;
-    -moz-transform-origin:100% 50%;
-    -ms-transform-origin:100% 50%;
-    -o-transform-origin:100% 50%;
-    transform-origin: 100% 50%;
-
-    -webkit-transform: rotateY(-90deg);
-    -moz-transform: rotateY(-90deg);
-    -ms-transform: rotateY(-90deg);
-    -o-transform: rotateY(-90deg);
-    transform: rotateY(-90deg);
-
+    -webkit-transform-origin:50% 0%;
+    -moz-transform-origin:50% 0%;
+    -ms-transform-origin:50% 0%;
+    -o-transform-origin:50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    -ms-transform: rotateX(-90deg);
+    -o-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
     -webkit-backface-visibility: visible;
     -moz-backface-visibility: visible;
     -ms-backface-visibility: visible;
     backface-visibility: visible;
 }
 
-aside li:hover > .sidebar-popout {
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg);
-    transform: rotateY(0deg);
+#menu li:hover > .sidebar-popout {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    visibility: visible;
+    opacity: 1;
+}
+
+/*pagination*/
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    padding: 6px 10px;
+    font-size: 2em;
+    /* margin: 0px 2px; */
+    color: white;
+    background-color: transparent;
+    border: none;
+    /* text-shadow: 0px 0px 5px rgb(255, 255, 255); */
+}
+
+.pagination>li:last-child>a, .pagination>li:last-child>span {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding: 6px 13px;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    color: rgb(255, 255, 255);
+    cursor: default;
+    background-color: crimson;
+    border-color: crimson;
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.43);
+    border-color: rgb(221, 221, 221);
 }

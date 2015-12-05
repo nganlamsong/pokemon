@@ -14,6 +14,7 @@
     <script type="text/javascript" src="<?php echo base_url();?>resource/js/jquery/jquery.countup/assets/countup/jquery.countup.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>resource/js/imagesloaded.pkgd.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>resource/js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>resource/js/jquery.nicescroll.min.js"></script>
     
     <title>Title here</title>
 </head>

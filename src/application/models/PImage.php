@@ -5,9 +5,22 @@ class PImage extends CI_Model {
         $this->load->database();
     }
     
-    public function get_images($count = 20, $id = NULL) {
+    function record_count() {
+        return $this->db->count_all('images');
+    }
+    
+    public function get_images($count = 25) {
         $query = $this->db->get('images', $count, 0);
         return $query->result_array();
+    }
+    
+    public function get_images_paging($start, $limit = 25) {
+        $this->db->limit($limit, $start);
+        $query = $this->db->get('images');
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
     }
     
     public function get_images_pkm($id = NULL) {
@@ -35,4 +48,6 @@ class PImage extends CI_Model {
         );
         return json_encode($result);
     }
+    
+    
 }
