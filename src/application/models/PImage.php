@@ -23,6 +23,18 @@ class PImage extends CI_Model {
         return false;
     }
     
+    public function get_image_count(){
+        $this->db->where('MEGA', '0');
+        $this->db->from('images');
+        return $this->db->count_all_results();
+    }
+    
+    public function get_mega_image_count(){
+        $this->db->where('MEGA', '0');
+        $this->db->from('images');
+        return $this->db->count_all_results();
+    }
+    
     public function get_images_pkm($id = NULL) {
         $query = $this->db->get_where('images', array('pokemon_id' => $id));
         return $query->result_array();
