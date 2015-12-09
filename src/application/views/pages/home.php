@@ -97,6 +97,9 @@
                     <?php foreach ($images as $image): ?>
                         <div class="grid-item">
                             <figure>
+                                <?php if ($image["ORIGIN"]) { ?>
+                                    <a href="<?php echo $image["ORIGIN"]; ?>"></a>
+                                <?php } ?>
                                 <img src="<?php echo $image['URL']; ?>" alt="">
                                 <figcaption>Caption</figcaption>
                             </figure>
@@ -111,6 +114,7 @@
 $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
 ?>
 <script type="text/javascript">
+
     $(document).ready(function(e) {
 
         function loadNextPage(nextPage) {
@@ -145,14 +149,7 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
         $('#toggle-overlay').on('click', function (event) {
             $("#overlay").toggleClass("in");
             $(this).toggleClass("active");
-        });
-
-        $('#about-modal').on('show.bs.modal', function (event) {
-            $("main").addClass("blur");
-        });
-
-        $('#about-modal').on('hide.bs.modal', function (event) {
-            $("main").removeClass("blur");
+            $("#content, #menu").toggleClass("inactive");
         });
 
         var date = new Date(<?php echo $in_progress_pkm->year; ?>, <?php echo $in_progress_pkm->mon - 1; ?>, <?php echo $in_progress_pkm->mday; ?>, <?php echo $in_progress_pkm->hours; ?>, <?php echo $in_progress_pkm->minutes; ?>, <?php echo $in_progress_pkm->seconds; ?>);
@@ -171,13 +168,6 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
                   isAnimated: false
             });
         });
-
-        $("#content").niceScroll({
-            cursorborder:"none",
-            cursorcolor:"rgba(255,255,255,.5)",
-            cursorwidth: "10px",
-            cursorborderradius: "0px"
-        }); // First scrollable DIV
 
     });
 </script>
