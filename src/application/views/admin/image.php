@@ -12,7 +12,12 @@
                             <?php if (OFFLINE) {?>
                                 <?php echo $image['URL']; ?>
                             <?php } else { ?>
-                                <img src="<?php echo $image['URL']; ?>" alt="<?php echo $image['ID']; ?>">
+                                <img src="<?php echo $image['URL']; ?>" style="height: 100px; width: auto;" alt="<?php echo $image['ID']; ?>">
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php if ($image['ORIGIN']) {?>
+                                <a href="<?php echo $image['ORIGIN']; ?>" target="_blank"><?php echo $image['ORIGIN']; ?></a>
                             <?php } ?>
                         </td>
                         <td class="text-right">
@@ -22,7 +27,7 @@
                 <?php } ?>
             <?php } else { ?>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="4">
                         This pokemon have no image at all
                     </td>
                 </tr>
@@ -33,6 +38,9 @@
                 <td>??</td>
                 <td>
                     <input class="form-control" name="url" placeholder="url">
+                </td>
+                <td>
+                    <input class="form-control" name="origin" placeholder="origin">
                 </td>
                 <td class="text-right">
                     <button class="btn btn-success" id="btn-add-img">Add</button>

@@ -4,7 +4,7 @@
 <div id="overlay">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-4 col-sm-offset-8 col-xs-12">
+            <div class="col-sm-4 col-sm-offset-8 col-xs-12 p-r-80">
                 <div class="overlay-transform delay-0">
                     <p class="m-b-40">
                         I am an artist who love to draw pokemon, and also I am a web developer. I made a little web page to collect my arts on

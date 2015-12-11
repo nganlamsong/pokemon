@@ -1,3 +1,113 @@
+<header class="container header">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-hairline text-uppercase text-center">NGANLAMSONG</h1>
+        </div>
+    </div>
+</header>
+<main class="container">
+    <section class="row m-b-lg">
+        <div class="col-sm-4 text-center">
+            <span class="display-4 text-hairline display-bordered">
+                <?php echo count($list); ?>
+            </span>
+            <h2 class="text-uppercase text-light">Pokemon</h2>
+        </div>
+        <div class="col-sm-8">
+            <div id="list" class="list">
+                <table class="table">
+                    <?php foreach ($list as $pokemon) { ?>
+                        <tr class="status-<?php echo $pokemon['status']; ?>" data-id="<?php echo $pokemon["id"]; ?>">
+                            <input type="hidden" class="pkm-id">
+                            <td class="text-light">
+                                <?php echo $pokemon['number']; ?>
+                            </td>
+                            <td>
+                                <?php if (OFFLINE) {?>
+                                    <div class="image">
+                                        <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png">
+                                    </div>
+                                <?php } else { ?>
+                                    <?php if (isset($pokemon['avartar']) && $pokemon['avartar'] != "") { ?>
+                                        <div class="image">
+                                            <img src="<?php echo $pokemon['avartar']; ?>" alt="">
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="image">
+                                            <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png">
+                                        </div>
+                                    <?php }?>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <?php echo $pokemon['name']; ?>
+                            </td>
+                            <td class="text-right">
+                                <button class="btn-update btn btn-primary">update</button>
+                                <button class="btn-delete btn btn-danger">delete</button>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="row m-b-lg">
+        <div class="col-sm-4 text-center">
+            <span class="display-4 text-hairline display-bordered"><?php echo count($images_list); ?></span>
+            <h2 class="text-uppercase text-light">images</h2>
+            <form id="form-img">
+                <div class="form-group">
+                    <input class="form-control" name="url" placeholder="url">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" name="origin" placeholder="origin">
+                </div>
+                <div class="form-group text-right">
+                    <button class="btn btn-success" id="btn-add-img">Add</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <div class="list">
+                <table class="table">
+                    <tbody>
+                    <?php if ($images_list) {?>
+                        <?php foreach($images_list as $image){ ?>
+                            <tr data-id="<?php echo $image['ID'];?>">
+                                <td class="text-light">
+                                    <?php echo $image['ID']; ?>
+                                </td>
+                                <td>
+                                    <?php if (OFFLINE) {?>
+                                        <?php echo $image['URL']; ?>
+                                    <?php } else { ?>
+                                        <img src="<?php echo $image['URL']; ?>" style="height: 100px; width: auto;" alt="<?php echo $image['ID']; ?>">
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <?php if ($image['ORIGIN']) {?>
+                                        <a href="<?php echo $image['ORIGIN']; ?>" target="_blank">Go to source</a>
+                                    <?php } ?>
+                                </td>
+                                <td class="text-right">
+                                    <button class="btn-image-remove btn btn-danger">delete</button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <tr>
+                            <td colspan="4">
+                                This pokemon have no image at all
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+        </div>
+
+    </section>
+</main>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -83,78 +193,11 @@
     </div>
   </div>
 </div>
-<main class="view-port row grid-space-0">
-    <aside class="col-sm-3" id="list-view">
-        <div class="inner">
-            <button id="btn-view-toggle">
-                <i class="fa fa-cogs"></i>
-            </button>
-            <div class="row">
-                <form class="m-b-20 search-form col-xs-12" id="search">
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1"><span class="fa fa-search"></span></span>
-                        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                    </div>
-                </form>
-                <div class="btn-group col-xs-12" role="group" aria-label="..." id="command">
-                    <input type="hidden" id="edit" val="0" />
-                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal"><span class="fa fa-plus"></span></button>
-                    <button type="button" class="btn btn-success pull-right" id="btn-edit"><span class="fa fa-edit"></span></button>
-                </div>
-            </div>
-
-        </div>
-        <div class="inner">
-            <div id="list" class="list m-b-20">
-                <?php foreach ($list as $pokemon) { ?>
-                    <div class="list-item-wrapper status-<?php echo $pokemon['status']; ?>" data-id="<?php echo $pokemon["id"]; ?>">
-                        <input type="hidden" class="pkm-id">
-                        <div class="number heading-font">
-                            <?php echo $pokemon['number']; ?>
-                        </div>
-                        <?php if (OFFLINE) {?>
-                            <div class="image">
-                                <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png">
-                            </div>
-                        <?php } else { ?>
-                            <?php if (isset($pokemon['avartar']) && $pokemon['avartar'] != "") { ?>
-                                <div class="image">
-                                    <img src="<?php echo $pokemon['avartar']; ?>" alt="">
-                                </div>
-                            <?php } else { ?>
-                                <div class="image">
-                                    <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png">
-                                </div>
-                            <?php }?>
-                        <?php } ?>
-                        <div class="name">
-                            <?php echo $pokemon['name']; ?>
-                        </div>
-                        <div class="command">
-                            <button class="btn-update btn">update</button>
-                            <button class="btn-delete btn">delete</button>
-                        </div>
-                    </div>
-                <?php } ?>                        
-            </div>
-        </div>
-    </aside>
-    <article class="main-info col-sm-9" id="main">
-        <div class="images-list-container">
-            <div class="clearfix" id="image-list">
-            </div>
-            <div id="image-load">
-                Loading
-            </div>
-        </div>
-        
-    </article>
-</main>
-<script type="text/javascript">           
+<script type="text/javascript">
     $(document).ready(function() {
-        $("#list").niceScroll({
+        $(".list").niceScroll({
             cursorborder:"none",
-            cursorcolor:"rgba(255,255,255,.5)",
+            cursorcolor:"rgba(0,0,0,.5)",
             cursorwidth: "10px",
             cursorborderradius: "0px"
         }); // First scrollable DIV
@@ -361,8 +404,11 @@
                                 <?php if (OFFLINE) {?>
                                     data.data.URL +
                                 <?php } else { ?>
-                                    '<img src="' + data.data.URL + '" alt="' + data.data.POKEMON_ID + '">' + 
+                                    '<img style="height: 100px; width: auto;" src="' + data.data.URL + '" alt="' + data.data.POKEMON_ID + '">' +
                                 <?php } ?>
+                            '</td>' +
+                            '<td>' +
+                                '<a target="_blank" href="' + data.data.ORIGIN + '">' + data.data.ORIGIN + '</a>' +
                             '</td>' +
                             '<td><button class="btn-image-remove btn btn-danger">delete</button></td></tr>';
                         $("#form-img > table > tbody").append(trElement);

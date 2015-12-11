@@ -8,7 +8,12 @@ class PImage extends CI_Model {
     function record_count() {
         return $this->db->count_all('images');
     }
-    
+
+    public function get_all_images(){
+        $query = $this->db->get('images');
+        return $query->result_array();
+    }
+
     public function get_images($count = 25) {
         $query = $this->db->get('images', $count, 0);
         return $query->result_array();
@@ -24,7 +29,6 @@ class PImage extends CI_Model {
     }
     
     public function get_image_count(){
-        $this->db->where('MEGA', '0');
         $this->db->from('images');
         return $this->db->count_all_results();
     }
@@ -40,10 +44,11 @@ class PImage extends CI_Model {
         return $query->result_array();
     }
     
-    public function add_image($p_id, $url) {
+    public function add_image($p_id, $url, $origin) {
         $data = array(
             'POKEMON_ID' => $p_id,
-            'URL' => $url
+            'URL' => $url,
+            'ORIGIN' => $origin,
         );
         
         $result = array(
