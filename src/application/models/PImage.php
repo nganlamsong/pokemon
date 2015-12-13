@@ -44,19 +44,16 @@ class PImage extends CI_Model {
         return $query->result_array();
     }
     
-    public function add_image($p_id, $url, $origin) {
+    public function add_image($input) {
+        
         $data = array(
-            'POKEMON_ID' => $p_id,
-            'URL' => $url,
-            'ORIGIN' => $origin,
+            'URL' => $input->post('url'),
+            'NAME' => $input->post('name'),
+            'ORIGIN' => $input->post('origin'),
         );
         
-        $result = array(
-            'data' => $data,
-            'result' => $this->db->insert('images', $data)
-        );
-        
-        return json_encode($result);
+        $this->db->insert('images', $data);
+        return $this->db->insert_id();
     }
     
      public function delete_image($id) {

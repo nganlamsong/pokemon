@@ -16,13 +16,14 @@ class Admin extends CI_Controller {
         $data['list'] = $this->pokemon->get_list();
         $data['images_list'] = $this->pimage->get_all_images();
         $data['images_count'] = $this->pimage->get_image_count();
+        $data['in_progress'] = $this->pokemon->get_progress_pkm();
         $this->load->view('admin/common/header');
         $this->load->view('admin/home', $data);
         $this->load->view('admin/common/footer');
     }
     
     public function add_pokemon() {
-        return $this->pokemon->add($_REQUEST);
+        return $this->pokemon->add($this->input);
     }
     
     public function delete_pokemon() {
@@ -31,7 +32,7 @@ class Admin extends CI_Controller {
     }
     
     public function update_pokemon () {
-        return $this->pokemon->update($_REQUEST);
+        return $this->pokemon->update($this->input);
     }
     
     public function get_pokemon() {
@@ -48,11 +49,23 @@ class Admin extends CI_Controller {
     }
     
     public function add_img() {
-        $pokemon_id = $_REQUEST['pokemon-id'];
-        $url = $_REQUEST['url'];
-        $origin = $_REQUEST['origin'];
         $this->load->model('pimage');
-        echo $this->pimage->add_image($pokemon_id, $url, $origin);
+        $this->load->model('mimgpkm');
+        $img_id = $this->pimage->add_image($this->input);
+        $pokemon_name = explode(',', $this->input->post('pokemon'));
+        for($x = 0; $x < count($pokemon_name); $x++) {
+            $id = $this->pokemon->getPokemonIdByName($pokemon_name[$x]);
+            if ($id) {
+                //this pokemon has already exist, we have its id
+                $this->mimgpkm->add($id, $img_id);
+            } else {
+                //add dump pokemon
+                $temp_id = $this->pokemon->addDump($pokemon_name[$x]);
+                //take dump id and then add a new image_pokemon entity
+                $this->mimgpkm->add($id, $img_id);
+            }
+        }
+        echo 1;
     }
     
     public function delete_img() {

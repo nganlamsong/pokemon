@@ -8,10 +8,12 @@
         <link rel="stylesheet" href="<?php echo base_url();?>resource/js/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo base_url();?>resource/style/admin.css">
         <link href="<?php echo base_url();?>resource/js/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo base_url();?>resource/js/jquery/jquery.countup/assets/countup/jquery.countup.css" rel="stylesheet" type="text/css"/>
         
         <script type="text/javascript" src="<?php echo base_url();?>resource/js/jquery/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>resource/js/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url();?>resource/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+        <script src="<?php echo base_url();?>resource/js/jquery/jquery.countup/assets/countup/jquery.countup.js" type="text/javascript"></script>
         <title>Mega Pokemon</title>
     </head>
     <body>

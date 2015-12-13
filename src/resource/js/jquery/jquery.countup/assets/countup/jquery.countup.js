@@ -108,8 +108,9 @@
         var replacement = $('<span>',{
             'class':'digit',
             css:{
-                top:'-2.1em',
-                opacity:0
+                top:'-1em',
+                opacity:0,
+                background: '#232323'
             },
             html:number
         });

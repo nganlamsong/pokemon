@@ -28,55 +28,48 @@ class Pokemon extends CI_Model {
         return $pList;
     }
         
-    public function add($param) {
+    private function getDataFromInput($param) {
         $info = array(
-            'height' => $param["height"],
-            'weight' => $param["weight"],
-            'hp' => $param["hp"],
-            'atk' => $param["atk"],
-            'def' => $param["def"],
-            'satk' => $param["satk"],
-            'sdef' => $param["sdef"],
-            'spd' => $param["spd"]
+            'hp' => $param->post("hp"),
+            'atk' => $param->post("atk"),
+            'def' => $param->post("def"),
+            'satk' => $param->post("satk"),
+            'sdef' => $param->post("sdef"),
+            'spd' => $param->post("spd")
         );
         
         $data = array(
-            'NUMBER' => $param["number"],
-            'NAME' => $param["name"],
-            'THUMBNAIL' => $param["thumbnail"],
-            'GIF' => $param["gif"],
-            'AVARTAR' => $param["avartar"],
+            'NUMBER' => $param->post("number"),
+            'NAME' => $param->post("name"),
+            'INFO_URL' => $param->post("info_url"),
+            'THUMBNAIL' => $param->post("thumbnail"),
+            'GIF' => $param->post("gif"),
+            'AVARTAR' => $param->post("avartar"),
             'INFO' => serialize($info),
-            'STATUS' => $param["status"],
-            
+            'STATUS' => $param->post("status"),
+            'MEGA' => ($param -> post("mega"))? 1:0,
+            'LEGEND' => ($param -> post("legend"))? 1:0,
         );
         
+        return $data;
+    }
+    
+    public function add($param) {
+        $data = $this->getDataFromInput($param);
         return $this->db->insert('pokemon', $data);
+    }
+    
+    public function addDump($name) {
+        $data = array(
+            'NAME' => $name
+        );
+        $this->db->insert('pokemon', $data);
+        return $this->db->insert_id();
     }
         
     public function update($param) {
-        $info = array(
-            'height' => $param["height"],
-            'weight' => $param["weight"],
-            'hp' => $param["hp"],
-            'atk' => $param["atk"],
-            'def' => $param["def"],
-            'satk' => $param["satk"],
-            'sdef' => $param["sdef"],
-            'spd' => $param["spd"]
-        );
-                
-        $data = array(
-            'NUMBER' => $param["number"],
-            'NAME'  => $param["name"],
-            'THUMBNAIL'  => $param["thumbnail"],
-            'GIF'  => $param["gif"],
-            'AVARTAR'  => $param["avartar"],
-            'INFO'  => serialize($info),
-            'ISTATUSNFO'  => $param["status"]
-        );
-
-        $this->db->where('id', $param['id']);
+        $data = $this->getDataFromInput($param);
+        $this->db->where('id', $param->post('id'));
         
         return $this->db->update('pokemon', $data);
     }
@@ -91,18 +84,27 @@ class Pokemon extends CI_Model {
                 $pList['data'] = array(
                     'id' => $row['ID'],
                     'number' => $row['NUMBER'],
+                    'infoUrl' => $row['INFO_URL'],
                     'name' => $row['NAME'],
                     'thumbnail' => $row['THUMBNAIL'],
                     'gif' => $row['GIF'],
                     'avartar' => $row['AVARTAR'],
                     'info' => unserialize($row['INFO']),
-                    'status' => $row['STATUS']
+                    'status' => $row['STATUS'],
+                    'mega' => $row['MEGA'],
+                    'legend' => $row['LEGEND'],
                 );
             }
         } else {
             $pList['status'] = 0;
         }
         return json_encode($pList);
+    }
+    
+    public function getPokemonIdByName($name) {
+        $result = $this->db->get_where('pokemon', array('name' => $name));
+        $result_array = $result->result_array();
+        return ($result_array)?($result_array[0]["ID"]):false;
     }
         
     public function delete($id) {

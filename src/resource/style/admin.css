@@ -20,8 +20,25 @@ main {
     padding-top: 4em;
 }
 
+.background-dark {
+    background-color: #232323;
+    color: white;
+}
+
 .header.container {
     background-color: rgba(255,255,255,.2);
+}
+
+#text-new-art {
+    border: none;
+    overflow: hidden;
+}
+
+
+#text-new-art:focus {
+    border: 1px solid darkgray;
+    box-shadow: none;
+    overflow: auto;
 }
 
 a, a:focus, a:hover {
@@ -82,26 +99,57 @@ h1.text-hairline {
 .btn {
     border-radius: 0px;
     border:none;
+    position: relative;
+    background-color: transparent!important;
+    z-index: 1;
 }
 
-.btn-primary {
+.btn:before{
+    content: '';
+    position: absolute;
+    top:0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    transform: skewX(-13deg);
+    z-index: -1;
+}
+
+.btn-primary:before {
     color: #fff;
     background-color: lightgray;
 }
 
-.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary {
+.btn-primary.active:before, .btn-primary.focus:before, 
+.btn-primary:active:before, .btn-primary:focus:before, 
+.btn-primary:hover:before {
     color: #fff;
     background-color: darkgray;
     border:none;
 }
 
-.btn-danger {
+.btn-danger:before {
     color: #fff;
     background-color: crimson;
 }
 
-.btn-danger.active, .btn-danger.focus, .btn-danger:active, .btn-danger:focus, .btn-danger:hover, .open>.dropdown-toggle.btn-danger {
+.btn-danger.active:before, .btn-danger.focus:before, 
+.btn-danger:active:before, .btn-danger:focus:before, 
+.btn-danger:hover:before {
     background-color: darkred;
+}
+
+.btn-success:before {
+    color: #fff;
+    background-color: yellowgreen;
+}
+
+.btn-success.active:before, .btn-success.focus:before, 
+.btn-success:active:before, .btn-success:focus:before, 
+.btn-success:hover:before {
+    color: #fff;
+    background-color: yellowgreen;
+    border:none;
 }
 
 .m-b-md {
@@ -159,7 +207,13 @@ h1.text-hairline {
 
 .form-control {
     border-radius: 0px;
-    min-height: 40px;
+    box-shadow: none;
+    border: none;
+    background-color: whitesmoke;
+    font-size: 1.25em;
+}
+
+.form-control:focus {
     box-shadow: none;
 }
 
@@ -171,6 +225,15 @@ h1.text-hairline {
 
 .modal-content {
     border-radius: 0px;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 400;
+    text-transform: uppercase;
 }
 
 .list-item-wrapper .command > .btn {
