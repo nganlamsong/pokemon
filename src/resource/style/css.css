@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-    background-image: url(../img/background.png);
+    background-image: url(../img/Pokémon_ORAS_Mega_Rayquaza_VS_Deoxys.png);
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -59,40 +59,15 @@ h1, .h1, h2, .h2, h3, .h3 {
     -ms-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
     transition: all .2s ease-in-out;
-    background-color: rgba(255,255,255,.05);
-    
-    background: -moz-linear-gradient(top,  rgba(255,255,255,.4) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  rgba(255,255,255,.4) 0%,rgba(255,255,255,0.2) 40%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.2) 40%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
-
-    
     text-align: left;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     height: 100px;
-    
     opacity: 1;
     font-size: 0px;
     position: fixed;
     left: 0px;
     right: 0px;
     z-index: 1000;
-}
-
-#menu.inactive {
-    opacity: 0;
-    -webkit-transform: translateY(-50px);
-    -moz-transform: translateY(-50px);
-    -ms-transform: translateY(-50px);
-    -o-transform: translateY(-50px);
-    transform: translateY(-50px);
-}
-
-#menu:hover {
-    background-color: rgba(255,255,255,.05);
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .3);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .3);
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .3);
 }
 
 img.img-icon {
@@ -112,15 +87,28 @@ img.img-icon {
     color: white;
     display: flex;
     letter-spacing: 0px;
-
     -webkit-flex-flow: column wrap;
     flex-flow: column wrap;
     height: 100px;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
+    font-size: 14px;
     position: relative;
-    overflow: hidden;
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+#menu a:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-bottom: 100px solid red;
+    border-right: 50px solid transparent;
+    position: absolute;
+    left: 100%;
+    top: 0px;
+    z-index: 1;
 }
 
 img.inprogress {
@@ -131,28 +119,26 @@ img.inprogress {
     height: 50px;
 }
 
-#menu a:focus, #menu a:hover, #menu li.selected > a {
-    color: white;
+#menu a:focus, #menu a:hover {
+    color: black;
     letter-spacing: 2px;
-    background-color: rgba(255,255,255,.1);
 }
 
 #menu li {
     position: relative;
     display: inline-block;
-    width: 100px;
     vertical-align: bottom;
 }
 
 .overlay-transform {
     opacity: 0;
-    
+
     -webkit-transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -moz-transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -ms-transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     -o-transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
+
     -webkit-transform: translateX(100px);
     -moz-transform: translateX(100px);
     -ms-transform: translateX(100px);
@@ -222,12 +208,6 @@ img.inprogress {
     background-color: transparent;
     padding-top: 100px;
     overflow: auto;
-
-    /*-webkit-transform-origin:0% 0%;*/
-    /*-moz-transform-origin:0% 0%;*/
-    /*-ms-transform-origin:0% 0%;*/
-    /*-o-transform-origin:0% 0%;*/
-    /*transform-origin:0% 0%;*/
 
     -webkit-transition: all .3s cubic-bezier(0.19, 1, 0.22, 1);
     -moz-transition: all .3s cubic-bezier(0.19, 1, 0.22, 1);
@@ -467,137 +447,137 @@ span.count-value {
 /* content styles */
 
 .inside {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: #ededed;
-  background: -webkit-gradient(linear, left top, left bottom,color-stop(0%, #f4f4f4), color-stop(100%, #ededed));
-  background: -moz-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
-  background: -ms-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom,color-stop(0%, #f4f4f4), color-stop(100%, #ededed));
+    background: -moz-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
+    background: -ms-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
 }
 .inside-full-height {
-  /*
-  // if you want to give content full height give him height: 100%;
-  // with content full height you can't apply margins to the content
-  // content full height does not work in ie http://stackoverflow.com/questions/27384433/ie-display-table-cell-child-ignores-height-100
-  */
-  height: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
+    /*
+    // if you want to give content full height give him height: 100%;
+    // with content full height you can't apply margins to the content
+    // content full height does not work in ie http://stackoverflow.com/questions/27384433/ie-display-table-cell-child-ignores-height-100
+    */
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* columns of same height styles */
 
 .row-height {
-  display: table;
-  table-layout: fixed;
-  height: 100%;
-  width: 100%;
+    display: table;
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
 }
 .col-height {
-  display: table-cell;
-  float: none;
-  height: 100%;
+    display: table-cell;
+    float: none;
+    height: 100%;
 }
 .col-top {
-  vertical-align: top;
+    vertical-align: top;
 }
 .col-middle {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 .col-bottom {
-  vertical-align: bottom;
+    vertical-align: bottom;
 }
 
 @media (min-width: 480px) {
-  .row-xs-height {
-    display: table;
-    table-layout: fixed;
-    height: 100%;
-    width: 100%;
-  }
-  .col-xs-height {
-    display: table-cell;
-    float: none;
-    height: 100%;
-  }
-  .col-xs-top {
-    vertical-align: top;
-  }
-  .col-xs-middle {
-    vertical-align: middle;
-  }
-  .col-xs-bottom {
-    vertical-align: bottom;
-  }
+    .row-xs-height {
+        display: table;
+        table-layout: fixed;
+        height: 100%;
+        width: 100%;
+    }
+    .col-xs-height {
+        display: table-cell;
+        float: none;
+        height: 100%;
+    }
+    .col-xs-top {
+        vertical-align: top;
+    }
+    .col-xs-middle {
+        vertical-align: middle;
+    }
+    .col-xs-bottom {
+        vertical-align: bottom;
+    }
 }
 
 @media (min-width: 768px) {
-  .row-sm-height {
-    display: table;
-    table-layout: fixed;
-    height: 100%;
-    width: 100%;
-  }
-  .col-sm-height {
-    display: table-cell;
-    float: none;
-    height: 100%;
-  }
-  .col-sm-top {
-    vertical-align: top;
-  }
-  .col-sm-middle {
-    vertical-align: middle;
-  }
-  .col-sm-bottom {
-    vertical-align: bottom;
-  }
+    .row-sm-height {
+        display: table;
+        table-layout: fixed;
+        height: 100%;
+        width: 100%;
+    }
+    .col-sm-height {
+        display: table-cell;
+        float: none;
+        height: 100%;
+    }
+    .col-sm-top {
+        vertical-align: top;
+    }
+    .col-sm-middle {
+        vertical-align: middle;
+    }
+    .col-sm-bottom {
+        vertical-align: bottom;
+    }
 }
 
 @media (min-width: 992px) {
-  .row-md-height {
-    display: table;
-    table-layout: fixed;
-    height: 100%;
-    width: 100%;
-  }
-  .col-md-height {
-    display: table-cell;
-    float: none;
-    height: 100%;
-  }
-  .col-md-top {
-    vertical-align: top;
-  }
-  .col-md-middle {
-    vertical-align: middle;
-  }
-  .col-md-bottom {
-    vertical-align: bottom;
-  }
+    .row-md-height {
+        display: table;
+        table-layout: fixed;
+        height: 100%;
+        width: 100%;
+    }
+    .col-md-height {
+        display: table-cell;
+        float: none;
+        height: 100%;
+    }
+    .col-md-top {
+        vertical-align: top;
+    }
+    .col-md-middle {
+        vertical-align: middle;
+    }
+    .col-md-bottom {
+        vertical-align: bottom;
+    }
 }
 
 @media (min-width: 1200px) {
-  .row-lg-height {
-    display: table;
-    table-layout: fixed;
-    height: 100%;
-    width: 100%;
-  }
-  .col-lg-height {
-    display: table-cell;
-    float: none;
-    height: 100%;
-  }
-  .col-lg-top {
-    vertical-align: top;
-  }
-  .col-lg-middle {
-    vertical-align: middle;
-  }
-  .col-lg-bottom {
-    vertical-align: bottom;
-  }
+    .row-lg-height {
+        display: table;
+        table-layout: fixed;
+        height: 100%;
+        width: 100%;
+    }
+    .col-lg-height {
+        display: table-cell;
+        float: none;
+        height: 100%;
+    }
+    .col-lg-top {
+        vertical-align: top;
+    }
+    .col-lg-middle {
+        vertical-align: middle;
+    }
+    .col-lg-bottom {
+        vertical-align: bottom;
+    }
 }
 
 input[type="image"] {

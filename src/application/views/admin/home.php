@@ -6,7 +6,7 @@
     </div>
 </header>
 <main class="container">
-    <section class="row m-b-lg">
+    <section class="row m-b-lg grid-space-0">
         <div class="col-sm-4 text-center">
             <span class="display-4 text-hairline display-bordered">
                 <?php echo count($list); ?>
@@ -55,7 +55,7 @@
             </div>
         </div>
     </section>
-    <section class="row m-b-lg">
+    <section class="row m-b-lg grid-space-0">
         <div class="col-sm-4 text-center">
             <span class="display-4 text-hairline display-bordered"><?php echo count($images_list); ?></span>
             <h2 class="text-uppercase text-light">images</h2>
@@ -105,12 +105,14 @@
         </div>
 
     </section>
+</main>
+<div class="container" style="background-color: white;">
     <section class="row">
-        <div class="col-sm-4 text-center">
+        <div class="col-xs-6 text-center">
             <h2 class="text-uppercase text-light">The next art</h2>
             <?php if (isset($in_progress[0]['AVARTAR']) && $in_progress[0]['AVARTAR'] != "") { ?>
                 <div class="image">
-                    <img src="<?php echo $in_progress[0]['avartar']; ?>" alt="">
+                    <img src="<?php echo $in_progress[0]['AVARTAR']; ?>" alt="">
                 </div>
             <?php } else { ?>
                 <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png" class="inprogress m-b-20">
@@ -119,8 +121,13 @@
             <textarea class="form-control m-b-lg" id="text-new-art" rows="5">Another pokemon for my Mega evolution collection. I am doing so much hard work and don't even have a tablet for my self. Saving money to buy one. If you love my works and you are generous, you can encourage me by donation. :)
             </textarea>
         </div>
+        <div class="col-xs-6">
+            <h2 class="text-uppercase text-light">About...</h2>
+            Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica. Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave. Seitan High Life reprehenderit consectetur cupidatat kogi. Et leggings fanny pack, elit bespoke vinyl art party Pitchfork…
+            A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.
+        </div>
     </section>
-</main>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="modal-add-img" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

@@ -1,0 +1,20 @@
+#menu {
+    background-color: rgba(70, 169, 106, 0.9);
+}
+
+#menu li:first-child > a {
+    background-color: #0D0D0D;
+}
+
+#menu li:first-child > a:before {
+    border-bottom-color: #0D0D0D;
+}
+
+#menu li:nth-child(2) > a {
+    background-color: #292929;
+    padding-left: 80px;
+}
+
+#menu li:nth-child(2) > a:before {
+    border-bottom-color: #292929;
+}
