@@ -10,9 +10,60 @@ class Admin extends CI_Controller {
         $this->load->model('pokemon');
         $this->load->model('pimage');
         $this->load->helper('url');
+        $this->load->library('session');
     }
         
     public function index() {
+        if (isset($this->session->userdata['logged_in'])) {
+            $this->load_admin_page();
+        } else {
+            // Load form helper library
+            $this->load->helper('form');
+            $this->load->view('admin/login');
+        }
+    }
+    
+    // Check for user login process
+    public function user_login_process() {
+        // Load database
+        $this->load->model('muser');
+        $data = array(
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password')
+        );
+        $result = $this->muser->login($data);
+        if ($result == TRUE) {
+
+            $username = $this->input->post('username');
+            if ($result != false) {
+                $session_data = array(
+                    'username' => $username,
+                );
+                // Add user data in session
+                $this->session->set_userdata('logged_in', $session_data);
+                $this->load_admin_page();
+            }
+        } else {
+            $data = array(
+                'error_message' => 'Invalid Username or Password'
+            );
+            $this->load->view('admin/login', $data);
+        }
+    }
+    
+    // Logout from admin page
+    public function logout() {
+        $this->load->helper('form');
+        // Removing session data
+        $sess_array = array(
+            'username' => ''
+        );
+        $this->session->unset_userdata('logged_in', $sess_array);
+        $data['message_display'] = 'Successfully Logout';
+        $this->load->view('admin/login', $data);
+    }
+    
+    private function load_admin_page() {
         $data['list'] = $this->pokemon->get_list();
         $data['images_list'] = $this->pimage->get_all_images();
         $data['images_count'] = $this->pimage->get_image_count();
@@ -21,7 +72,8 @@ class Admin extends CI_Controller {
         $this->load->view('admin/home', $data);
         $this->load->view('admin/common/footer');
     }
-    
+
+
     public function add_pokemon() {
         return $this->pokemon->add($this->input);
     }

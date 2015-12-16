@@ -1,3 +1,8 @@
+<div class="container">
+    <nav>
+        <a href="<?php echo base_url(); ?>index.php/admin/logout">Log out</a>
+    </nav>
+</div>
 <header class="container header">
     <div class="row">
         <div class="col-xs-12">

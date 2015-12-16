@@ -111,7 +111,7 @@
 $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
 ?>
 <script type="text/javascript">
-
+    var loading = false;
     $(document).ready(function(e) {
 
         function loadNextPage(nextPage) {
@@ -126,6 +126,7 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
                         $grid.masonry();
                     });
                     $("#page").val(nextPage + 1);
+                    loading = false;
                 },
                 error: function(a,b,c) {
                     console.log(a,b,c);
@@ -135,9 +136,10 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
 
         $('#content').on('scroll', function() {
             if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-                if ($("#page").val() < $("#maxpage").val()) {
+                if ($("#page").val() < $("#maxpage").val() && loading != true) {
                     var page = parseInt($("#page").val());
                     var nextpage = page + 1;
+                    loading = true;
                     loadNextPage(nextpage);
                 }
             }

@@ -302,3 +302,15 @@ h1.text-hairline {
 .img-right .info-content > .inner {
     text-align: right;
 }
+
+nav {
+    min-height: 50px;
+    font-size: 16px;
+    text-align: right;
+}
+
+nav > a {
+    display: inline-block;
+    height: 100%;
+    padding: 14px 0px;
+}
