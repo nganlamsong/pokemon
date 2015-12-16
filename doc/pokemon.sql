@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2015 at 01:41 AM
+-- Generation Time: Dec 16, 2015 at 05:34 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -205,6 +205,26 @@ INSERT INTO `pokemon` (`ID`, `NUMBER`, `NAME`, `MEGA`, `LEGEND`, `THUMBNAIL`, `G
 (66, 0, 'Charizard', 0, 0, NULL, NULL, NULL, '', '', NULL, 0, '', ''),
 (67, 0, 'Charmander1', 0, 0, NULL, NULL, NULL, '', '', NULL, 0, '', ''),
 (68, 0, 'Charmander 2', 0, 0, NULL, NULL, NULL, '', '', NULL, 0, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `USER_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(25) NOT NULL,
+  `PASS` varchar(32) NOT NULL,
+  PRIMARY KEY (`USER_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`USER_ID`, `NAME`, `PASS`) VALUES
+(1, 'admin', 'admin');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
