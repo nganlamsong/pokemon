@@ -1,70 +1,6 @@
 <button id="toggle-overlay">
     <span class="menu-icon"></span>
 </button>
-<div id="overlay">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4 col-sm-offset-8 col-xs-12 p-r-80">
-                <div class="overlay-transform delay-0">
-                    <p class="m-b-40">
-                        I am an artist who love to draw pokemon, and also I am a web developer. I made a little web page to collect my arts on
-                        <a href="http://nganlamsong.deviantart.com">Deviant</a> to do the tracking for my progress and make a gallery in my favorite styles.
-                    </p>
-                </div>
-                <div class="overlay-transform delay-1">
-                    <h3>Copyright</h3>
-                    <p class="m-b-40">
-                        Pokemon is hereby copyrighted by <strong>@GameFreak - The Pokemon Company</strong>, and all the arts on this website is created by me as fan art.
-                        I do not own Pokemon.
-                    </p>
-                </div>
-                <div class="overlay-transform delay-2">
-                    <h3>Planning</h3>
-                    <p class="m-b-40">
-                        I love Mega Evolution, although I dislike some of them, I always wish to draw all mega pokemon.
-                        More desire, I would like to draw the full list of Pokemon. :v
-                    </p>
-                </div>
-                <div class="overlay-transform delay-3">
-                    <a class="count-item" href="#">
-                        <span class="count-value">125</span>
-                        <span class="count-label">Normal Pokemon</span>                       
-                    </a>
-                    <a class="count-item" href="#">
-                        <span class="count-value">16</span>
-                        <span class="count-label">Mega Pokemon</span>                       
-                    </a>
-                </div>
-                <div class="overlay-transform delay-4">
-                    <h3>The next art</h3>
-                    <?php if (isset($in_progress[0]['AVARTAR']) && $in_progress[0]['AVARTAR'] != "") { ?>
-                        <div class="image">
-                            <img src="<?php echo $in_progress[0]['avartar']; ?>" alt="">
-                        </div>
-                    <?php } else { ?>
-                        <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png" class="inprogress">
-                    <?php }?>
-                    <div id="countup">
-                    </div>
-                    <div class="clearfix m-b-20">
-
-                        <p>
-                         Another pokemon for my Mega evolution collection.
-                        I am doing so much hard work and don't even have a tablet for my self.
-                        Saving money to buy one. If you love my works and you are generous, you can encourage me by donation. :)
-                        </p>
-                    </div>
-                </div>
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="overlay-transform delay-5">
-                    <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="5QKXA84YYMFSE">
-                    <input type="image" src="<?php echo base_url(); ?>resource/img/donate.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <nav id="menu">
     <input type="hidden" id="page" value="1">
@@ -107,6 +43,76 @@
         </section>
     </article>
 </main>
+<div id="overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="overlay-transform delay-0">
+                    <p class="m-b-40">
+                        I am an artist who love to draw pokemon, and also I am a web developer. I made a little web page to collect my arts on
+                        <a href="http://nganlamsong.deviantart.com">Deviant</a> to do the tracking for my progress and make a gallery in my favorite styles.
+                    </p>
+                </div>
+                <div class="overlay-transform delay-1">
+                    <h3>Copyright</h3>
+                    <p class="m-b-40">
+                        Pokemon is hereby copyrighted by <strong>@GameFreak - The Pokemon Company</strong>, and all the arts on this website is created by me as fan art.
+                        I do not own Pokemon.
+                    </p>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="overlay-transform delay-2">
+                    <h3>Planning</h3>
+                    <p class="m-b-40">
+                        I love Mega Evolution, although I dislike some of them, I always wish to draw all mega pokemon.
+                        More desire, I would like to draw the full list of Pokemon. :v
+                    </p>
+                </div>
+                <div class="overlay-transform delay-3">
+                    <a class="count-item" href="#">
+                        <span class="count-value">125</span>
+                        <span class="count-label">Normal Pokemon</span>                       
+                    </a>
+                    <a class="count-item" href="#">
+                        <span class="count-value">16</span>
+                        <span class="count-label">Mega Pokemon</span>                       
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="overlay-transform delay-4">
+                    <h3>The next art</h3>
+                    <?php if (isset($in_progress[0]['AVARTAR']) && $in_progress[0]['AVARTAR'] != "") { ?>
+                        <div class="image">
+                            <img src="<?php echo $in_progress[0]['avartar']; ?>" alt="">
+                        </div>
+                    <?php } else { ?>
+                        <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png" class="inprogress">
+                    <?php }?>
+                    <div id="countup">
+                    </div>
+                    <div class="clearfix m-b-20">
+
+                        <p>
+                         Another pokemon for my Mega evolution collection.
+                        I am doing so much hard work and don't even have a tablet for my self.
+                        Saving money to buy one. If you love my works and you are generous, you can encourage me by donation. :)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="overlay-transform delay-5">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="5QKXA84YYMFSE">
+                    <input type="image" src="<?php echo base_url(); ?>resource/img/donate.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
 ?>
