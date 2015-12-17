@@ -11,6 +11,8 @@ class Home extends CI_Controller {
         $this->load->model('pokemon');
         $this->load->model('pimage');
         $this->load->helper('url');
+        $this->load->library("pagination");
+        $this->load->model("mpagination");
     }
 
     private function initPaging() {
@@ -38,7 +40,14 @@ class Home extends CI_Controller {
     }
 
     public function index() {
-        $data["images"] = $this->pimage->get_images_paging(0, PER_PAGE);
+        //pagination
+        $config = $this->initPaging();
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data["images"] = $this->mpagination->fetch_images ($config["per_page"], $page);
+        $data["links"] = $this->pagination->create_links();
+
+
         $data['title'] = 'title';
         $data['in_progress'] = $this->pokemon->get_progress_pkm();
         $delimiter = $this->pimage->record_count() / PER_PAGE;
@@ -55,9 +64,16 @@ class Home extends CI_Controller {
     }
 
     public function page() {
+        $config = $this->initPaging();
+        $this->pagination->initialize($config);
         $page = $this->input->post('page');
-        $start = ($page - 1)*PER_PAGE;
-        $data["images"] = $this->pimage->get_images_paging (PER_PAGE, $start);
-        $this->load->view('pages/griditem',$data);
+        if ($this->input->post('getpaging')) {
+            $data["links"] = $this->pagination->create_links();
+            $this->load->view('pages/pagination',$data);
+        } else {
+            $start = ($page - 1)*PER_PAGE;
+            $data["images"] = $this->mpagination->fetch_images (PER_PAGE, $start);
+            $this->load->view('pages/griditem',$data);
+        }
     }
 }

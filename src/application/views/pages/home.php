@@ -43,41 +43,37 @@
         </section>
     </article>
 </main>
+<div id="pagination-container">
+    <ul class="pagination" id="ajax_pagingsearc">
+        <?php echo $links; ?>
+    </ul>
+</div>
 <div id="overlay">
     <div class="container">
+        <div class="row m-b-lg">
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4 text-center">
+                <a href="http://nganlamsong.deviantart.com/" target="_blank" class="m-b-40">
+                    <img src="<?php echo base_url(); ?>resource/img/avartar.png"/>
+                </a>
+                <p class="m-b-80">
+                    I am an artist who love to draw pokemon, and also I am a web developer. I made a little web page to collect my arts on
+                    <a href="http://nganlamsong.deviantart.com">Deviant</a> to do the tracking for my progress and make a gallery in my favorite styles.
+                </p>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-4">
-                <div class="overlay-transform delay-0">
-                    <p class="m-b-40">
-                        I am an artist who love to draw pokemon, and also I am a web developer. I made a little web page to collect my arts on
-                        <a href="http://nganlamsong.deviantart.com">Deviant</a> to do the tracking for my progress and make a gallery in my favorite styles.
-                    </p>
-                </div>
                 <div class="overlay-transform delay-1">
                     <h3>Copyright</h3>
                     <p class="m-b-40">
                         Pokemon is hereby copyrighted by <strong>@GameFreak - The Pokemon Company</strong>, and all the arts on this website is created by me as fan art.
                         I do not own Pokemon.
                     </p>
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="overlay-transform delay-2">
                     <h3>Planning</h3>
                     <p class="m-b-40">
                         I love Mega Evolution, although I dislike some of them, I always wish to draw all mega pokemon.
                         More desire, I would like to draw the full list of Pokemon. :v
                     </p>
-                </div>
-                <div class="overlay-transform delay-3">
-                    <a class="count-item" href="#">
-                        <span class="count-value">125</span>
-                        <span class="count-label">Normal Pokemon</span>                       
-                    </a>
-                    <a class="count-item" href="#">
-                        <span class="count-value">16</span>
-                        <span class="count-label">Mega Pokemon</span>                       
-                    </a>
                 </div>
             </div>
             <div class="col-xs-4">
@@ -102,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12">
+            <div class="col-xs-4">
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="overlay-transform delay-5">
                     <input type="hidden" name="cmd" value="_s-xclick">
                     <input type="hidden" name="hosted_button_id" value="5QKXA84YYMFSE">
@@ -117,22 +113,35 @@
 $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
 ?>
 <script type="text/javascript">
-    var loading = false;
     $(document).ready(function(e) {
 
-        function loadNextPage(nextPage) {
+        var $grid = $('#grid').imagesLoaded( function() {
+            // init Masonry after all images have loaded
+            $grid.masonry({
+                itemSelector: '.grid-item',
+                columnWidth: '.grid-sizer',
+                percentPosition: true,
+                gutter: 0,
+                isAnimated: false
+            });
+        });
+
+        function ajaxPaging(url, page) {
             $.ajax({
                 type: "POST",
-                data: {page: nextPage},
-                url: '<?php echo base_url(); ?>index.php/home/page',
+                data: {
+                    page: page
+                },
+                url: url,
                 dataType: 'html',
                 success: function(data) {
                     var items = $(data);
                     $grid.append(items).masonry( 'appended', items ).imagesLoaded(function(){
                         $grid.masonry();
                     });
-                    $("#page").val(nextPage + 1);
-                    loading = false;
+
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+
                 },
                 error: function(a,b,c) {
                     console.log(a,b,c);
@@ -140,15 +149,31 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
             });
         }
 
-        $('#content').on('scroll', function() {
-            if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-                if ($("#page").val() < $("#maxpage").val() && loading != true) {
-                    var page = parseInt($("#page").val());
-                    var nextpage = page + 1;
-                    loading = true;
-                    loadNextPage(nextpage);
+        function ajaxGetPaging(url, page) {
+            $.ajax({
+                type: "POST",
+                data: {
+                    page: page,
+                    getpaging: 1
+                },
+                url: url,
+                dataType: 'html',
+                success: function(data) {
+                    $("#pagination-container").html(data);
+                },
+                error: function(a,b,c) {
+                    console.log(a,b,c);
                 }
-            }
+            });
+        }
+
+        $(document).on('click', "#ajax_pagingsearc a", function(e) {
+            e.preventDefault();
+            $grid.masonry( 'remove', $(".grid-item") );
+            var url = $(this).attr("href");
+            var page = $(this).data("ci-pagination-page");
+            ajaxPaging(url, page);
+            ajaxGetPaging(url, page);
         });
 
         $('#toggle-overlay').on('click', function (event) {
@@ -161,17 +186,6 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
         console.log(date);
         $('#countup').countup({
             start: date
-        });
-
-        var $grid = $('#grid').imagesLoaded( function() {
-            // init Masonry after all images have loaded
-            $grid.masonry({
-                  itemSelector: '.grid-item',
-                  columnWidth: '.grid-sizer',
-                  percentPosition: true,
-                  gutter: 0,
-                  isAnimated: false
-            });
         });
 
     });
