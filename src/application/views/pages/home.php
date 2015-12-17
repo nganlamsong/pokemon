@@ -85,7 +85,7 @@
                     <h3>The next art</h3>
                     <?php if (isset($in_progress[0]['AVARTAR']) && $in_progress[0]['AVARTAR'] != "") { ?>
                         <div class="image">
-                            <img src="<?php echo $in_progress[0]['avartar']; ?>" alt="">
+                            <img src="<?php echo $in_progress[0]['AVARTAR']; ?>" alt="">
                         </div>
                     <?php } else { ?>
                         <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png" class="inprogress">
