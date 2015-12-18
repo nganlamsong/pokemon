@@ -51,63 +51,32 @@
 <div id="overlay">
     <div class="container">
         <div class="row m-b-lg">
-            <div class="col-xs-12 col-sm-4 col-sm-offset-4 text-center">
-                <a href="http://nganlamsong.deviantart.com/" target="_blank" class="m-b-40">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+                <a href="http://nganlamsong.deviantart.com/" target="_blank" class="m-b-40 block">
                     <img src="<?php echo base_url(); ?>resource/img/avartar.png"/>
                 </a>
-                <p class="m-b-80">
+                <p class="m-b-20">
                     I am an artist who love to draw pokemon, and also I am a web developer. I made a little web page to collect my arts on
                     <a href="http://nganlamsong.deviantart.com">Deviant</a> to do the tracking for my progress and make a gallery in my favorite styles.
                 </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-4">
-                <div class="overlay-transform delay-1">
-                    <h3>Copyright</h3>
-                    <p class="m-b-40">
-                        Pokemon is hereby copyrighted by <strong>@GameFreak - The Pokemon Company</strong>, and all the arts on this website is created by me as fan art.
-                        I do not own Pokemon.
-                    </p>
-                    <h3>Planning</h3>
-                    <p class="m-b-40">
-                        I love Mega Evolution, although I dislike some of them, I always wish to draw all mega pokemon.
-                        More desire, I would like to draw the full list of Pokemon. :v
-                    </p>
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="overlay-transform delay-4">
-                    <h3>The next art</h3>
-                    <?php if (isset($in_progress[0]['AVARTAR']) && $in_progress[0]['AVARTAR'] != "") { ?>
-                        <div class="image">
-                            <img src="<?php echo $in_progress[0]['AVARTAR']; ?>" alt="">
-                        </div>
-                    <?php } else { ?>
-                        <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png" class="inprogress">
-                    <?php }?>
-                    <div id="countup">
-                    </div>
-                    <div class="clearfix m-b-20">
+                <p class="m-b-80">
+                    Pokémon and its trademarks are ©1995-2015 Nintendo, Creatures, and GAMEFREAK.
+                    all the arts on this website is created by me as fan art.
+                    I do not own Pokemon.
+                </p>
 
-                        <p>
-                         Another pokemon for my Mega evolution collection.
-                        I am doing so much hard work and don't even have a tablet for my self.
-                        Saving money to buy one. If you love my works and you are generous, you can encourage me by donation. :)
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="overlay-transform delay-5">
-                    <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="5QKXA84YYMFSE">
-                    <input type="image" src="<?php echo base_url(); ?>resource/img/donate.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
+<!--                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="overlay-transform delay-5">-->
+<!--                    <input type="hidden" name="cmd" value="_s-xclick">-->
+<!--                    <input type="hidden" name="hosted_button_id" value="5QKXA84YYMFSE">-->
+<!--                    <input type="image" src="--><?php //echo base_url(); ?><!--resource/img/donate.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
+<!--                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
+<!--                </form>-->
             </div>
         </div>
     </div>
+</div>
+<div class="container-fluid bottom-line">
+    <h3 class="text-uppercase pull-right">Mega rayquaza >></h3>
 </div>
 <?php
 $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
@@ -182,11 +151,11 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
             $("#content, #menu").toggleClass("inactive");
         });
 
-        var date = new Date(<?php echo $in_progress_pkm->year; ?>, <?php echo $in_progress_pkm->mon - 1; ?>, <?php echo $in_progress_pkm->mday; ?>, <?php echo $in_progress_pkm->hours; ?>, <?php echo $in_progress_pkm->minutes; ?>, <?php echo $in_progress_pkm->seconds; ?>);
-        console.log(date);
-        $('#countup').countup({
-            start: date
-        });
+//        var date = new Date(<?php //echo $in_progress_pkm->year; ?>//, <?php //echo $in_progress_pkm->mon - 1; ?>//, <?php //echo $in_progress_pkm->mday; ?>//, <?php //echo $in_progress_pkm->hours; ?>//, <?php //echo $in_progress_pkm->minutes; ?>//, <?php //echo $in_progress_pkm->seconds; ?>//);
+//        console.log(date);
+//        $('#countup').countup({
+//            start: date
+//        });
 
     });
 </script>

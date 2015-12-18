@@ -32,6 +32,10 @@ p {
     color: #b3b3b3;
 }
 
+.block {
+    display: block;
+}
+
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: -0.2em;
 }

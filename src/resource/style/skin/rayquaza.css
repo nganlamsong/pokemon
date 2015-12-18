@@ -40,3 +40,8 @@ body {
 .pagination>li:focus, .pagination>li:hover {
     background-color: rgba(70, 169, 106, 0.9);
 }
+
+.bottom-line {
+    background-color: black;
+    color: #222;
+}
