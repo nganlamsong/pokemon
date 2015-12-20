@@ -11,7 +11,20 @@ class PImage extends CI_Model {
 
     public function get_all_images(){
         $query = $this->db->get('images');
-        return $query->result_array();
+        $result = $query->result_array();
+        $pList = array();
+        foreach ($result as $image) {
+            $this->db->select('*');
+            $this->db->from('pokemon');
+            $this->db->join('image_pokemon', 'pokemon.id = image_pokemon.pid');
+            $this->db->where('image_pokemon.iid', $image["ID"]);
+            $pokemon = $this->db->get()->result_array();
+            $pList[] = array(
+                'image' => $image,
+                'pokemon' => $pokemon,
+            );
+        }
+        return $pList;
     }
 
     public function get_images($count = 25) {

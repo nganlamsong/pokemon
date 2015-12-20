@@ -194,7 +194,6 @@ img.inprogress {
 #content {
     width: 100%;
     padding-top: 100px;
-    overflow: auto;
     -webkit-transition: all .3s cubic-bezier(0.19, 1, 0.22, 1);
     -moz-transition: all .3s cubic-bezier(0.19, 1, 0.22, 1);
     -ms-transition: all .3s cubic-bezier(0.19, 1, 0.22, 1);

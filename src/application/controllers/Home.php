@@ -1,7 +1,7 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-define('PER_PAGE', 25);
+define('PER_PAGE', 40);
 
 class Home extends CI_Controller {
 

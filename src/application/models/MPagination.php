@@ -14,7 +14,20 @@ class MPagination extends CI_Model {
         $this->db->limit($limit, $start);
         $query = $this->db->get('images');
         if ($query->num_rows() > 0) {
-            return $query->result_array();
+            $result = $query->result_array();
+            $pList = array();
+            foreach ($result as $image) {
+                $this->db->select('*');
+                $this->db->from('pokemon');
+                $this->db->join('image_pokemon', 'pokemon.id = image_pokemon.pid');
+                $this->db->where('image_pokemon.iid', $image["ID"]);
+                $pokemon = $this->db->get()->result_array();
+                $pList[] = array(
+                    'image' => $image,
+                    'pokemon' => $pokemon,
+                );
+            }
+            return $pList;
         }
         return false;
     }

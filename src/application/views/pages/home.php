@@ -30,11 +30,17 @@
                     <?php foreach ($images as $image): ?>
                         <div class="grid-item">
                             <figure>
-                                <?php if ($image["ORIGIN"]) { ?>
-                                    <a href="<?php echo $image["ORIGIN"]; ?>"></a>
+                                <?php if ($image["image"]["ORIGIN"]) { ?>
+                                    <a href="<?php echo $image["image"]["ORIGIN"]; ?>"></a>
                                 <?php } ?>
-                                <img src="<?php echo $image['URL']; ?>" alt="">
+                                <img src="<?php echo $image["image"]['URL']; ?>" alt="">
                                 <figcaption>Caption</figcaption>
+                                <?php if ($image["pokemon"]) { ?>
+                                    <?php foreach($image["pokemon"] as $pokemon) { ?>
+                                        <h2><?php echo $pokemon["NAME"]; ?></h2>
+                                    <?php } ?>
+                                    
+                                <?php } ?>
                             </figure>
                         </div>
                     <?php endforeach; ?>
@@ -94,6 +100,11 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
                 isAnimated: false
             });
         });
+        
+        // jQuery
+        $grid.on( 'layoutComplete', function( event, laidOutItems ) {
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+        });
 
         function ajaxPaging(url, page) {
             $.ajax({
@@ -108,9 +119,6 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
                     $grid.append(items).masonry( 'appended', items ).imagesLoaded(function(){
                         $grid.masonry();
                     });
-
-                    $('html, body').animate({ scrollTop: 0 }, 'slow');
-
                 },
                 error: function(a,b,c) {
                     console.log(a,b,c);
