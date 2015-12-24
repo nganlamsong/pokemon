@@ -247,10 +247,26 @@ img.inprogress {
 }
 
 .grid-item > figure {
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    -o-transition: all .2s linear;
     transition: all .2s linear;
     background-color: rgba(255,255,255,.1);
     overflow: hidden;
+    position: relative;
     box-shadow: 0px 0px 6px rgba(0,0,0,.2);
+}
+
+.grid-item > figure > .pokemons{
+    position: absolute;
+    top:0px;
+    right:0px;
+    width: 30px;
+}
+
+.grid-item > figure > .pokemons > .image{
+    width: 100%;
 }
 
 .grid-item a {

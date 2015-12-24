@@ -34,6 +34,15 @@ body {
     border-bottom-color: #292929;
 }
 
+#menu li:nth-child(3) > a {
+    background-color: #404040;
+    padding-left: 80px;
+}
+
+#menu li:nth-child(3) > a:before {
+    border-bottom-color: #404040;
+}
+
 .pagination>.active, .pagination>.active,
 .pagination>.active:hover, .pagination>.active,
 .pagination>.active:focus, .pagination>.active,
@@ -44,4 +53,8 @@ body {
 .bottom-line {
     background-color: black;
     color: #222;
+}
+
+#menu a:focus, #menu a:hover {
+    color: rgba(70, 169, 106, 0.9);
 }

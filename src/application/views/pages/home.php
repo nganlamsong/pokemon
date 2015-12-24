@@ -9,13 +9,19 @@
         <li class="selected">
             <a href="#">
                 <img src="<?php echo base_url();?>resource/img/pokeball.png" class="img-icon">
-                All
+                Normal
             </a>
         </li>
         <li>
             <a href="#">
                 <img src="<?php echo base_url();?>resource/img/mega.png" class="img-icon">
                 Mega
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="<?php echo base_url();?>resource/img/mega.png" class="img-icon">
+                Legend
             </a>
         </li>
     </ul>
@@ -36,10 +42,19 @@
                                 <img src="<?php echo $image["image"]['URL']; ?>" alt="">
                                 <figcaption>Caption</figcaption>
                                 <?php if ($image["pokemon"]) { ?>
-                                    <?php foreach($image["pokemon"] as $pokemon) { ?>
-                                        <h2><?php echo $pokemon["NAME"]; ?></h2>
-                                    <?php } ?>
-                                    
+                                    <div class="pokemons">
+                                        <?php foreach($image["pokemon"] as $pokemon) { ?>
+                                            <?php if (isset($pokemon['AVARTAR']) && $pokemon['AVARTAR'] != "") { ?>
+                                                <div class="image" title="<?php echo $pokemon['NAME']; ?>" data-id="<?php echo $pokemon['ID']; ?>">
+                                                    <img src="<?php echo $pokemon['AVARTAR']; ?>" alt="">
+                                                </div>
+                                            <?php } else { ?>
+                                                <div class="image" title="<?php echo $pokemon['NAME']; ?>" data-id="<?php echo $pokemon['ID']; ?>">
+                                                    <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png">
+                                                </div>
+                                            <?php }?>
+                                        <?php } ?>
+                                    </div>
                                 <?php } ?>
                             </figure>
                         </div>
