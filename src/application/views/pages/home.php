@@ -2,7 +2,7 @@
     <span class="menu-icon"></span>
 </button>
 
-<nav id="menu">
+<!--<nav id="menu">
     <input type="hidden" id="page" value="1">
     <input type="hidden" id="maxpage" value="<?php echo $max_page; ?>">
     <ul class="list-unstyled">
@@ -25,10 +25,36 @@
             </a>
         </li>
     </ul>
-</nav>
+</nav>-->
 
 <main id="content">
     <article class="container-fluid" id="main-container">
+        <section class="row selection">
+            <div class="col-sm-4">
+                <figure class="text-center">
+                    <img src="<?php echo base_url();?>resource/img/electrode.png" class="img-responsive">
+                    <figcaption>
+                        <h3>NORMAL POKEMON</h3>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-4">
+                <figure class="text-center">
+                    <img src="<?php echo base_url();?>resource/img/kyurem.png" class="img-responsive">
+                    <figcaption>
+                        <h3>LEGEND POKEMON</h3>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-sm-4">
+                <figure class="text-center">
+                    <img src="<?php echo base_url();?>resource/img/mega_garchomp.png" class="img-responsive">
+                    <figcaption>
+                        <h3>MEGA POKEMON</h3>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
         <section class="row">
             <div class="col-xs-12 grid-container">
                 <div id="grid">
@@ -45,11 +71,11 @@
                                     <div class="pokemons">
                                         <?php foreach($image["pokemon"] as $pokemon) { ?>
                                             <?php if (isset($pokemon['AVARTAR']) && $pokemon['AVARTAR'] != "") { ?>
-                                                <div class="image" title="<?php echo $pokemon['NAME']; ?>" data-id="<?php echo $pokemon['ID']; ?>">
+                                                <div class="image" title="<?php echo $pokemon['NAME']; ?>" data-id="<?php echo $pokemon['PID']; ?>">
                                                     <img src="<?php echo $pokemon['AVARTAR']; ?>" alt="">
                                                 </div>
                                             <?php } else { ?>
-                                                <div class="image" title="<?php echo $pokemon['NAME']; ?>" data-id="<?php echo $pokemon['ID']; ?>">
+                                                <div class="image" title="<?php echo $pokemon['NAME']; ?>" data-id="<?php echo $pokemon['PID']; ?>">
                                                     <img src="<?php echo base_url(); ?>resource/img/avartar/unknow.png">
                                                 </div>
                                             <?php }?>
@@ -99,10 +125,54 @@
 <div class="container-fluid bottom-line">
     <h3 class="text-uppercase pull-right">Mega rayquaza >></h3>
 </div>
+<div id="p-info">
+    <img id="p-img" alt="">
+    <h2 id="p-name">
+
+    </h2>
+    <div id="p-hp"></div>
+    <div id="p-atk"></div>
+    <div id="p-def"></div>
+    <div id="p-satk"></div>
+    <div id="p-sdef"></div>
+    <div id="p-spd"></div>
+    <a id="p-url"></a>
+</div>
 <?php
 $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
 ?>
 <script type="text/javascript">
+    
+    function getPokemon(id) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>index.php/home/get_pokemon',
+            type: 'POST',
+            data: 'id=' + id,
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                $("#p-img").attr('src', data.data.avartar);
+                $("#p-name").html(data.data.name);
+                $("#p-hp").html(data.data.info.hp);
+                $("#p-atk").html(data.data.info.atk);
+                $("#p-def").html(data.data.info.def);
+                $("#p-satk").html(data.data.info.satk);
+                $("#p-sdef").html(data.data.info.sdef);
+                $("#p-spd").html(data.data.info.spd);
+                $("#p-url").html(data.data.infoUrl);
+                $("#p-info").fadeIn();
+            },
+            error: function(a, b, c) {
+                console.log("fail cmnr", a, b, c);
+            }
+        });
+    };
+    
+    $(document).on("click", ".pokemons > .image", function(e){
+        var id = $(this).data('id');
+        getPokemon(id);
+    });
+    
     $(document).ready(function(e) {
 
         var $grid = $('#grid').imagesLoaded( function() {

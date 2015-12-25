@@ -62,6 +62,11 @@ class Home extends CI_Controller {
         $this->load->view('common/footer');
 
     }
+    
+    public function get_pokemon() {
+        $id = $this->input->post('id');
+        echo $this->pokemon->get($id);
+    }
 
     public function page() {
         $config = $this->initPaging();
