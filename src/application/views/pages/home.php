@@ -31,7 +31,7 @@
     <article class="container-fluid" id="main-container">
         <section class="row selection">
             <div class="col-sm-4">
-                <figure class="text-center">
+                <figure class="text-center p-category normal">
                     <img src="<?php echo base_url();?>resource/img/electrode.png" class="img-responsive">
                     <figcaption>
                         <h3>NORMAL POKEMON</h3>
@@ -39,7 +39,7 @@
                 </figure>
             </div>
             <div class="col-sm-4">
-                <figure class="text-center">
+                <figure class="text-center p-category legend">
                     <img src="<?php echo base_url();?>resource/img/kyurem.png" class="img-responsive">
                     <figcaption>
                         <h3>LEGEND POKEMON</h3>
@@ -47,7 +47,7 @@
                 </figure>
             </div>
             <div class="col-sm-4">
-                <figure class="text-center">
+                <figure class="text-center p-category legend">
                     <img src="<?php echo base_url();?>resource/img/mega_garchomp.png" class="img-responsive">
                     <figcaption>
                         <h3>MEGA POKEMON</h3>
@@ -62,10 +62,10 @@
                     <?php foreach ($images as $image): ?>
                         <div class="grid-item">
                             <figure>
-                                <?php if ($image["image"]["ORIGIN"]) { ?>
-                                    <a href="<?php echo $image["image"]["ORIGIN"]; ?>"></a>
+                                <?php if ($image["image"]["origin"]) { ?>
+                                    <a href="<?php echo $image["image"]["origin"]; ?>"></a>
                                 <?php } ?>
-                                <img src="<?php echo $image["image"]['URL']; ?>" alt="">
+                                <img src="<?php echo $image["image"]['url']; ?>" alt="">
                                 <figcaption>Caption</figcaption>
                                 <?php if ($image["pokemon"]) { ?>
                                     <div class="pokemons">
@@ -191,11 +191,12 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         });
 
-        function ajaxPaging(url, page) {
+        function ajaxPaging(url, page, category) {
             $.ajax({
                 type: "POST",
                 data: {
-                    page: page
+                    page: page,
+                    category: category,
                 },
                 url: url,
                 dataType: 'html',
@@ -211,12 +212,13 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
             });
         }
 
-        function ajaxGetPaging(url, page) {
+        function ajaxGetPaging(url, page, category) {
             $.ajax({
                 type: "POST",
                 data: {
                     page: page,
-                    getpaging: 1
+                    getpaging: 1,
+                    category: category
                 },
                 url: url,
                 dataType: 'html',
@@ -236,6 +238,50 @@ $in_progress_pkm = json_decode($in_progress[0]['DATE_START']);
             var page = $(this).data("ci-pagination-page");
             ajaxPaging(url, page);
             ajaxGetPaging(url, page);
+        });
+        
+        function getImages(url, page, category, init) {
+            if (init) {
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        page: page,
+                        category: category
+                    },
+                    url: '<?php echo base_url(); ?>index.php/home/get_pokemon_cate',
+                    dataType: 'html',
+                    success: function(data) {
+                        var items = $(data);
+                        $grid.append(items).masonry( 'appended', items ).imagesLoaded(function(){
+                            $grid.masonry();
+                        });
+                    },
+                    error: function(a,b,c) {
+                        console.log(a,b,c);
+                    }
+                });
+            } else {
+                ajaxPaging(url, page, category);
+                ajaxGetPaging(url, page, category);
+            }
+            
+        }
+        
+        $(".p-category").on("click", function(e){
+            if ($(this).hasClass("normal")) {
+//                load normal pokemon
+                $('body').animate({ scrollTop: 0 }, 'slow');
+                $grid.masonry( 'remove', $(".grid-item") );
+                getImages(undefined, 1, '', true);
+            }
+            if ($(this).hasClass("legend")) {
+//                load normal pokemon
+                getImages(undefined, 1, 'legend', true);
+            }
+            if ($(this).hasClass("mega")) {
+//                load normal pokemon
+                getImages(undefined, 1, 'mega', true);
+            }
         });
 
         $('#toggle-overlay').on('click', function (event) {
