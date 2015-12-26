@@ -14,6 +14,7 @@
         <script type="text/javascript" src="<?php echo base_url();?>resource/js/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url();?>resource/js/jquery.nicescroll.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url();?>resource/js/jquery/jquery.countup/assets/countup/jquery.countup.js" type="text/javascript"></script>
+        <script src="<?php echo base_url();?>resource/js/autocomplete.js" type="text/javascript"></script>
         <title>Mega Pokemon</title>
     </head>
     <body>

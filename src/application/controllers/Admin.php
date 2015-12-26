@@ -1,7 +1,7 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-define('OFFLINE', false);
+define('OFFLINE', true);
 class Admin extends CI_Controller {
 
     public function __construct()
@@ -149,5 +149,10 @@ class Admin extends CI_Controller {
         $data["start_result"] = $this->pokemon->start_progress($id);
 
         echo json_encode($data);
+    }
+    
+    public function auto_complete() {
+        $filter_name = $this->input->post('filter_name');
+        echo $this->pokemon->auto_complete($filter_name);
     }
 }

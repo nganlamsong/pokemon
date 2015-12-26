@@ -127,4 +127,11 @@ class Pokemon extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('pokemon',  array('INPROGRESS' => '1', 'DATE_START' => json_encode($date_array)));
     }
+    
+    public function auto_complete($name) {
+        $this->db->like('name', $name);
+        $query = $this->db->get('pokemon', 5, 0);
+        $res = $query->result_array();
+        return json_encode($res);
+    }
 }

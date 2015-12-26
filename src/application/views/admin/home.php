@@ -71,23 +71,23 @@
                     <tbody>
                     <?php if ($images_list) {?>
                         <?php foreach($images_list as $image){ ?>
-                            <tr data-id="<?php echo $image['ID'];?>">
+                            <tr data-id="<?php echo $image['image']['ID']; ?>">
                                 <td class="text-light">
-                                    <?php echo $image['ID']; ?>
+                                    <?php echo $image['image']['ID']; ?>
                                 </td>
                                 <td>
                                     <?php if (OFFLINE) {?>
-                                        <?php echo $image['URL']; ?>
+                                        <?php echo $image['image']['URL']; ?>
                                     <?php } else { ?>
-                                        <img src="<?php echo $image['URL']; ?>" style="height: 100px; width: auto;" alt="<?php echo $image['ID']; ?>">
+                                        <img src="<?php echo $image['image']['URL']; ?>" style="height: 100px; width: auto;" alt="<?php echo $image['image']['ID']; ?>">
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <?php echo $image['NAME']; ?>
+                                    <?php echo $image['image']['NAME']; ?>
                                 </td>
                                 <td>
-                                    <?php if ($image['ORIGIN']) {?>
-                                        <a href="<?php echo $image['ORIGIN']; ?>" target="_blank">Go to source</a>
+                                    <?php if ($image['image']['ORIGIN']) {?>
+                                        <a href="<?php echo $image['image']['ORIGIN']; ?>" target="_blank">Go to source</a>
                                     <?php } ?>
                                 </td>
                                 <td class="text-right">
@@ -144,7 +144,8 @@
       <div class="modal-body">
         <form id="form-img">
             <div class="form-group">
-                <input class="form-control input-sm" name="pokemon" placeholder="pokemons">
+                <input class="form-control input-sm" name="pokemon" placeholder="pokemons" id="pokemons">
+                <div id="pokemon-panel"></div>
             </div>
             <div class="form-group">
                 <input class="form-control input-sm" name="url" placeholder="url">
@@ -250,6 +251,41 @@
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
+        
+        $("#pokemons").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: '<?php echo base_url(); ?>index.php/admin/auto_complete',
+                    dataType: 'json',
+                    type: 'post',
+                    data: {
+                        'filter_name': $("#pokemons").val()
+                    },
+                    success: function(json) {
+//                        console.log(json);
+                        response($.map(json, function(item) {
+                            console.log(item);
+                            return {
+                                label: item.NAME,
+                                value: item.ID
+                            };
+                        }));
+                    }
+                });
+            },
+            select: function(item) {
+                $('#pokemons').val('');
+
+                $('#pokemon-panel' + item['value']).remove();
+
+                $('#pokemon-panel').append('<div id="pokemon-panel' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="pokemon[]" value="' + item['value'] + '" /></div>');	
+            }
+        });
+	
+        $('#pokemons').delegate('.fa-minus-circle', 'click', function() {
+            $(this).parent().remove();
+        });
+        
         var date = new Date(<?php echo $in_progress_pkm->year; ?>, <?php echo $in_progress_pkm->mon - 1; ?>, <?php echo $in_progress_pkm->mday; ?>, <?php echo $in_progress_pkm->hours; ?>, <?php echo $in_progress_pkm->minutes; ?>, <?php echo $in_progress_pkm->seconds; ?>);
         $('#countup').countup({
             start: date
@@ -407,19 +443,20 @@
             e.preventDefault();
             var that = $(this);
             that.button("loading");
-            $.ajax({
-                url: '<?php echo base_url(); ?>index.php/admin/add_img',
-                type: 'POST',
-                data: $("#form-img").serialize(),
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data);
-                    that.button("reset");
-                },
-                error: function(a, b, c) {
-                    console.log("fail cmnr", a, b, c);
-                }
-            });
+            console.log($("#form-img").serialize());
+//            $.ajax({
+//                url: '<?php echo base_url(); ?>index.php/admin/add_img',
+//                type: 'POST',
+//                data: $("#form-img").serialize(),
+//                dataType: 'json',
+//                success: function(data) {
+//                    console.log(data);
+//                    that.button("reset");
+//                },
+//                error: function(a, b, c) {
+//                    console.log("fail cmnr", a, b, c);
+//                }
+//            });
         });
         
         $(document).on("click", ".btn-image-remove", function(e){

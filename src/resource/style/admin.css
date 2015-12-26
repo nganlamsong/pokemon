@@ -314,3 +314,16 @@ nav > a {
     height: 100%;
     padding: 14px 0px;
 }
+
+ul.dropdown-menu {
+    position: absolute;
+    border: 1px solid darkgray;
+    min-width: 200px;
+    background-color: white;
+    z-index: 1;
+    font-size: 16px;
+    list-style: none;
+    padding: 10px 20px;
+    line-height: 1.5em;
+    display: none;
+}
